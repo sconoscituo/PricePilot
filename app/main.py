@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
 from app.database import init_db, AsyncSessionLocal
-from app.routers import products, users
+from app.routers import products, users, alerts
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -69,6 +69,7 @@ app.add_middleware(
 # 라우터 등록
 app.include_router(users.router)
 app.include_router(products.router)
+app.include_router(alerts.router, prefix="/api/v1")
 
 
 @app.get("/", tags=["health"])
